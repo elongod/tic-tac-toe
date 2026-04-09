@@ -22,14 +22,19 @@ def check_winner():
     if board[0] == board[4] == board[8] != " ": return board[0]
     if board[2] == board[4] == board[6] != " ": return board[2]
     return None
-    
+
 def play():
     current_player = "X"
     for turn in range(9):
         draw_board()
         print("輪到 " + current_player + " 下棋")
-        position = int(input("選擇位置 (1-9)：")) - 1
-        board[position] = current_player
+        while True:
+                    position = int(input("選擇位置 (1-9)：")) - 1
+                    if 0 <= position <= 8 and board[position] == " ":
+                        board[position] = current_player
+                        break
+                    else:
+                        print("這個位置不能下！請重新選擇。")
         winner = check_winner()
         if winner:
             draw_board()
